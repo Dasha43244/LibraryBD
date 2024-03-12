@@ -261,7 +261,8 @@ class BD
                                 switch (M)
                                 {
                                     case 1:
-                                        Console.WriteLine("Новая книга..."); using (SqlCommand createOrder = new SqlCommand(sql, conect))
+                                        Console.WriteLine("Новая книга..."); 
+                                        using (SqlCommand createOrder = new SqlCommand(sql, conect))
                                         {
                                             int crt = await createOrder.ExecuteNonQueryAsync();
                                             Console.WriteLine("Введите ID"); string crtID = Console.ReadLine();
@@ -272,10 +273,12 @@ class BD
 
                                             sql = $"insert into Books (ID,Book,Author,Release,Rating) values ('{crtID}','{dateOrder}','{crtID1}','{dateOrder1}','{crtID2}')"; createOrder.CommandText = sql;
                                             crt = await createOrder.ExecuteNonQueryAsync();
+                                            Console.WriteLine("Обновлено");
                                         }
                                         break;
                                     case 2:
-                                        Console.WriteLine("Редактирование книги..."); using (SqlCommand updateOrder = new SqlCommand(sql, conect))
+                                        Console.WriteLine("Редактирование книги..."); 
+                                        using (SqlCommand updateOrder = new SqlCommand(sql, conect))
                                         {
                                             int upOrd = await updateOrder.ExecuteNonQueryAsync();
                                             Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("\nВыберите действие");
@@ -295,16 +298,19 @@ class BD
                                                     break;
                                             }
                                             updateOrder.CommandText = sql; upOrd = await updateOrder.ExecuteNonQueryAsync();
+                                            Console.WriteLine("Обновлено");
                                         }
                                         break;
                                     case 3:
                                         try
                                         {
+                                            Console.WriteLine("Удаление книги...");
                                             using (SqlCommand deleteUser = new SqlCommand(sql, conect))
                                             {
                                                 int del = await deleteUser.ExecuteNonQueryAsync(); Console.WriteLine("Введите ID для удаления");
                                                 string delID = Console.ReadLine(); sql = $"use Library delete from Books where ID={delID}";
                                                 deleteUser.CommandText = sql; del = await deleteUser.ExecuteNonQueryAsync();
+                                                Console.WriteLine("Обновлено");
                                             }
                                         }
                                         catch
@@ -316,11 +322,13 @@ class BD
                                     case 4:
                                         try
                                         {
+                                            Console.WriteLine("Выбор таблицы");
                                             returnToTableSelection = true;
                                         }
                                         catch
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Error");
+                                            Console.ForegroundColor = ConsoleColor.Red; 
+                                            Console.WriteLine("Error");
                                             Console.ResetColor();
                                         }
                                         break;
